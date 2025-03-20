@@ -221,3 +221,9 @@ Implementację obu algorytmów, funkcji je scalającej oraz generowanie wykresó
 Obliczenia wykonaliśmy dla \(k \in [2, 9]\) i otrzymane rezultaty przedstawiliśmy na wykresach poniżej. Każdy ekxperyment został wykonany dla `l=4`.
 ![operations_k9.png](images/times_k9.png)
 ![operations_k9.png](images/operations_k9.png)
+
+Następnie przeprowadziliśmy doświadczenia ze zmienną wartością \(l \in [2, 5]\)
+
+![plots_with_l](images/plots_l.png)
+
+Możemy zauważyć niewielką różnicę w czasach wywołania dla różnych `l` - im mniejsza jego wartość tym obliczenia były nieznacznie szybsze. Wynika to z faktu, że mnożenie algorytmem **Strassena** jest szybsze od mnożenia metodą **Bineta**, więc im szybciej zaczniemy z niej korzystać w obliczeniach tym szybciej otrzymamy całościowe wyniki.
