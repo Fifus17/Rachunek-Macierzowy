@@ -48,6 +48,7 @@ def merge_matrices(X_11, X_12, X_21, X_22):
 
 
 def matrix_multiplication(A, B, l=8):
+    global add_count, sub_count, mul_count
     n = len(A)
     if n <= l:
         return strassen_multiplication(A, B)
@@ -59,6 +60,8 @@ def matrix_multiplication(A, B, l=8):
     C12 = matrix_multiplication(A11, B12, l) + matrix_multiplication(A12, B22, l)
     C21 = matrix_multiplication(A21, B11, l) + matrix_multiplication(A22, B21, l)
     C22 = matrix_multiplication(A21, B12, l) + matrix_multiplication(A22, B22, l)
+
+    add_count += 4
 
     return merge_matrices(C11, C12, C21, C22)
 
@@ -167,7 +170,7 @@ def plot_results_with_l(results, ls):
     plt.grid()
     plt.show()
 
-ks = range(5, 9)  # Ile się uda wykonać
+ks = range(5, 8)  # Ile się uda wykonać
 ls = [2, 3, 4, 5]  # Wybrane wartości l
 
 # results = benchmark_matrix_multiplication(ks)
