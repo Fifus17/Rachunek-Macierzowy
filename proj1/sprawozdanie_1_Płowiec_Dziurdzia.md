@@ -30,7 +30,7 @@ $$
 C = A \cdot B, \quad \text{gdzie} \quad c_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}
 $$
 
-Dla każdego elementu $ c_{ij} $ wykonujemy $n$ operacji mnożenia i dodawania, co prowadzi do całkowitej liczby operacji rzędu **O(n³)**.
+Dla każdego elementu $c_{ij}$ wykonujemy $n$ operacji mnożenia i dodawania, co prowadzi do całkowitej liczby operacji rzędu **O(n³)**.
 
 
 ## 3. Metoda Bineta – mnożenie adaptacyjne  
@@ -74,7 +74,7 @@ C_{22} = A_{21} B_{12} + A_{22} B_{22}
 $$
 
 3. **Scalanie wyników**  
-   Łączymy bloki w macierz wynikową $ C $.
+   Łączymy bloki w macierz wynikową $C$.
 
 ### 3.3 Złożoność obliczeniowa  
 
@@ -91,7 +91,7 @@ Dzięki temu, zamiast złożoności **$O(n^3)$**, uzyskujemy złożoność **$O(
 
 ### 4.2 Algorytm  
 
-Podobnie jak w metodzie Bineta, dzielimy macierze $ A $ i $ B $ na cztery bloki. Następnie definiujemy siedem pośrednich iloczynów macierzowych:
+Podobnie jak w metodzie Bineta, dzielimy macierze $A$ i $B$ na cztery bloki. Następnie definiujemy siedem pośrednich iloczynów macierzowych:
 
 $$
 M_1 = (A_{11} + A_{22}) \cdot (B_{11} + B_{22})
@@ -155,7 +155,7 @@ Implementację obu algorytmów, funkcji je scalającej oraz generowanie wykresó
 ### 1. Pseudokod 
 **Funkcja: `matrix_multiplication(A, B, l)`**
 - **Dane wejściowe:**  
-  - `A`, `B`: Kwadratowe macierze o rozmiarze $ n \times n $  
+  - `A`, `B`: Kwadratowe macierze o rozmiarze $n \times n$  
   - `l`: Próg przełączania na metodę Strassena  
 - **Wynik:**  
   - Macierz `C`, będąca wynikiem iloczynu `A * B`
@@ -182,7 +182,7 @@ Implementację obu algorytmów, funkcji je scalającej oraz generowanie wykresó
 
 **Funkcja: `strassen_multiplication(A, B)`**
 - **Dane wejściowe:**  
-  - `A`, `B`: Kwadratowe macierze o rozmiarze $ n \times n $
+  - `A`, `B`: Kwadratowe macierze o rozmiarze $n \times n$
 - **Wynik:**  
   - Macierz `C`, będąca wynikiem iloczynu `A * B`  
 
@@ -215,7 +215,7 @@ Implementację obu algorytmów, funkcji je scalającej oraz generowanie wykresó
 6. **Zwróć wynikową macierz `C`**  
 
 ### 2. Wyniki
-Obliczenia wykonaliśmy dla $k \in [2, 9]$ i otrzymane rezultaty przedstawiliśmy na wykresach poniżej. Każdy ekxperyment został wykonany dla `l=4`.
+Obliczenia wykonaliśmy dla $k \in [2, 9]$ i otrzymane rezultaty przedstawiliśmy na wykresach poniżej. Każdy eksperyment został wykonany dla `l=4`.
 ![](images/times_k9.png)
 ![](images/operations_k9.png)
 
