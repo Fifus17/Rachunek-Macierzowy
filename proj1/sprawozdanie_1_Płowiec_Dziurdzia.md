@@ -2,7 +2,7 @@
 #### Jakub Płowiec, Filip Dziurdzia
 
 ## Zadanie
-Dla macierzy o rozmiarze mniejszym lub równym $2^l \times 2^l$ algorytm rekurencyjny Binéta. Dla macierzy o rozmiarze większym od $2^l × 2^l$ algorytm rekurencyjny Strassena.
+Dla macierzy o rozmiarze mniejszym lub równym $2^l \times 2^l$ algorytm rekurencyjny Strassena. Dla macierzy o rozmiarze większym od $2^l × 2^l$ algorytm rekurencyjny Binéta.
 
 ## Wstęp teoretyczny
 
