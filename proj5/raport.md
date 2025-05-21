@@ -6,36 +6,34 @@
 W wybranym języku programowania (**Python**) napisać program, który:
 
 1. Implementuje metodę potęgową dla macierzy 3x3 z warunkiem początkowym:
-   - losujemy wektor $z_0 \in (0,1)^3$,
+   - losujemy wektor $z_0 \in (0, 1)^3$,
    - obliczamy $w_0 = A \cdot z_0$,
-   - liczymy błąd: $error = ||Az_0 − max(w_{0i}) \cdot z_0||_p$,
+   - liczymy błąd: $error = ||Az_0 - max(w_{0i}) \cdot z_0||_p$,
    - jeśli $error < 1e-8$, losujemy nowy $z_0$,
-   - iterujemy aż $||Az − λz||_p < epsilon = 0.0001$ dla różnych $p = 1,2,3,4, \infty $.
+   - iterujemy aż $||Az - \lambda z||_p < epsilon = 0.0001$ dla różnych $p = 1,2,3,4, \infty$.
 
 2. Oblicza SVD macierzy $A = UDV^T$:
-   - najpierw poprzez własne wartości i wektory $A \cdot A^T → U, D$,
+   - najpierw poprzez własne wartości i wektory $A \cdot A^T \rightarrow U, D$,
    - następnie $V = A^T \cdot U \cdot inv(D)$, gdzie $inv(D)$ to macierz diagonalna z odwrotnościami wartości własnych.
 
-3. Porównuje wykresy zbieżności metody potęgowej dla różnych $p \in {1,2,3,4, \infty}$ i 3 losowych wektorów startowych — w sumie 15 wykresów (iteracja vs error).
+3. Porównuje wykresy zbieżności metody potęgowej dla różnych $p \in {1,2,3,4, \infty }$ i 3 losowych wektorów startowych — w sumie 15 wykresów (iteracja vs error).
 
-4. Sprawdza dokładność rekonstrukcji: $||UDV^T − A||_p$ dla $p \in {1,2,3,4, \infty}$ oraz porównuje z wynikami bibliotecznego SVD.
+4. Sprawdza dokładność rekonstrukcji: $||UDV^T - A||_p$ dla $p \in {1,2,3,4, \infty }$ oraz porównuje z wynikami bibliotecznego SVD.
 
----
 
 ## Pseudokod algorytmu metody potęgowej
 
-1. Wylosuj $z_0 \in (0,1)^3$
+1. Wylosuj $z_0 \in (0, 1)^3$
 2. Oblicz $w_0 = A \cdot z_0$
-3. Oblicz $error = ||Az_0 − max(w_{0i})·z_0||_p$
+3. Oblicz $error = ||Az_0 - max(w_{0i}) \cdot z_0||_p$
 4. Jeśli $error < 1e-8$, wróć do 1
 5. Inaczej:
    - iteruj aż $error < epsilon$:
      - $w = A \cdot z$
      - $\lambda = max(w)$
      - $z = \frac{w}{||w||_p}$
-     - $error = ||Az − \lambda z||_p$
+     - $error = ||Az - \lambda z||_p$
 
----
 
 ## Implementacja
 
@@ -54,9 +52,9 @@ def power_method(A, p=2, epsilon=1e-4, max_iter=15, z=None):
     errors = []
     for _ in range(max_iter):
         w = A @ z
-        λ = np.max(w)
+        lam = np.max(w)
         z = w / np.linalg.norm(w, ord=p)
-        error = np.linalg.norm(A @ z - λ * z, ord=p)
+        error = np.linalg.norm(A @ z - lam * z, ord=p)
         errors.append(error)
         if error < epsilon:
             break
@@ -74,7 +72,6 @@ V = A.T @ U @ np.linalg.inv(D)
 S = U @ D @ V.T
 ```
 
----
 
 ## Wylosowana macierz A
 
@@ -83,7 +80,6 @@ S = U @ D @ V.T
  [0.74022275 0.95098443 0.04265521]
  [0.61992262 0.16091681 0.3074236 ]]
 ```
----
 
 ## Wyniki obliczeń
 
@@ -111,9 +107,8 @@ S = U @ D @ V.T
  [-0.30067372  0.93508764 -0.18763375]]
 ```
 
----
 
-## Błędy rekonstrukcji ||UDV - A||ₚ
+## Błędy rekonstrukcji $ ||UDV - A||_p $
 
 Porównano rekonstrukcję macierzy z oryginalną A dla różnych norm:
 
@@ -125,29 +120,27 @@ Porównano rekonstrukcję macierzy z oryginalną A dla różnych norm:
 
 W każdym przypadku błędy są bliskie zeru, co świadczy o poprawności obliczeń.
 
----
 
 ## Wykresy zbieżności metody potęgowej
 
-Dla każdej normy $p ∈ {1,2,3,4,\infty}$ wygenerowano 3 wykresy (dla 3 losowych $z_0$), przedstawiające:
+Dla każdej normy $p \in {1,2,3,4,\infty }$ wygenerowano 3 wykresy (dla 3 losowych $z_0$), przedstawiające:
 
 - Oś X: numer iteracji
 - Oś Y: błąd $||Az - \lambda z||_p$
 
 Łącznie 15 wykresów ilustrujących szybkość zbieżności.
 
-![](/proj5/zbieznosc_norma_p1.png)
-![](/proj5/zbieznosc_norma_p2.png)
-![](/proj5/zbieznosc_norma_p3.png)
-![](/proj5/zbieznosc_norma_p4.png)
-![](/proj5/zbieznosc_norma_pinf.png)
+![](zbieznosc_norma_p1.png)
+![](zbieznosc_norma_p2.png)
+![](zbieznosc_norma_p3.png)
+![](zbieznosc_norma_p4.png)
+![](zbieznosc_norma_pinf.png)
 
 
----
 
 ## Wnioski
 
 - Metoda potęgowa skutecznie aproksymuje dominującą wartość i wektor własny macierzy A.
-- Obliczenia SVD z $A\cdot A^T$są zgodne z wynikami bibliotecznymi `numpy.linalg.svd`.
-- Błędy rekonstrukcji UDV − A są bardzo małe — potwierdza to poprawność własnej implementacji.
+- Obliczenia SVD z $A \cdot A^T$ są zgodne z wynikami bibliotecznymi `numpy.linalg.svd`.
+- Błędy rekonstrukcji UDV - A są bardzo małe — potwierdza to poprawność własnej implementacji.
 - Metoda potęgowa może być przydatna przy przybliżonym znajdowaniu największej wartości własnej.

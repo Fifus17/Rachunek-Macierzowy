@@ -9,9 +9,9 @@ def power_method(A, p=2, epsilon=1e-4, max_iter=15, z=None):
     errors = []
     for _ in range(max_iter):
         w = A @ z
-        λ = np.max(w)
+        lam = np.max(w)
         z = w / np.linalg.norm(w, ord=p)
-        error = np.linalg.norm(A @ z - λ * z, ord=p)
+        error = np.linalg.norm(A @ z - lam * z, ord=p)
         errors.append(error)
         if error < epsilon:
             break
